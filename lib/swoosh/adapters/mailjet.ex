@@ -76,7 +76,7 @@ defmodule Swoosh.Adapters.Mailjet do
     |> prepare_html(email)
     |> prepare_text(email)
     #|> prepare_cc(email)
-    #|> prepare_bcc(email)
+    |> prepare_bcc(email)
     #|> prepare_reply_to(email)
     |> prepare_attachments(email)
     #|> prepare_custom_vars(email)
@@ -158,7 +158,7 @@ defmodule Swoosh.Adapters.Mailjet do
   defp prepare_cc(body, %{cc: cc}), do: Map.put(body, :cc, render_recipient(cc))
 
   defp prepare_bcc(body, %{bcc: []}), do: body
-  defp prepare_bcc(body, %{bcc: bcc}), do: Map.put(body, :bcc, render_recipient(bcc))
+  defp prepare_bcc(body, %{bcc: bcc}), do: Map.put(body, :Bcc, prepare_recipient(bcc))
 
   defp prepare_subject(body, %{subject: subject}), do: Map.put(body, :Subject, subject)
 
